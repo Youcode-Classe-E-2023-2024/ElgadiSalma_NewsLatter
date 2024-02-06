@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 class subscribeController extends Controller
 {
 
-    public function add_subscribe(Request $request)
+    public function subscribe(Request $request)
     {
         try {
             $request->validate([
@@ -30,7 +30,26 @@ class subscribeController extends Controller
             'email' => $request->input('email'),
         ]);
 
-        return view('subscribe');
+        return back()->with('success', 'Vous avez été abonné avec succès.');
     }
 
+    public function unsubscribe(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $email = $request->input('email');
+
+        $subscriber = Subscriber::where('email', $email)->first();
+
+        if (!$subscriber) {
+            return back()->withErrors([
+                'email'=> 'Email non trouvé.'
+                ])->onlyInput('email');        }
+
+        $subscriber->update(['status' => 1]);
+
+        return back()->with('success', 'Vous avez été désabonné avec succès.');
+    }
 }
