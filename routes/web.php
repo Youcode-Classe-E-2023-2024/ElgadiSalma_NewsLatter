@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\newsController;
+use App\Http\Controllers\userController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
+
+Route::middleware(['auth.check'])->group(function () 
+{
+    Route::get('/dashboard', [newsController::class,'dashboard'])->name('dashboard');
+  
+});
+
+Route::get('/login', [userController::class,'index'])->name('login.show');
+Route::post('/login', [userController::class,'login'])->name('login');
