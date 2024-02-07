@@ -16,9 +16,9 @@ use App\Http\Controllers\userController;
 |
 */
 
-Route::get('/subscribe', function () {
-    return view('subscribe');
-});
+// Route::get('/subscribe', function () {
+//     return view('subscribe');
+// });
 
 Route::middleware(['auth.check'])->group(function () 
 {
@@ -26,6 +26,7 @@ Route::middleware(['auth.check'])->group(function ()
   
 });
 
+Route::get('/subscribe', [SubscribeController::class, 'subscribeShow'])->name('subscribe.show');
 Route::post('/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe');
 Route::post('/unsubscribe', [SubscribeController::class, 'unsubscribe'])->name('unsubscribe');
 
