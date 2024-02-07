@@ -10,6 +10,10 @@ use Illuminate\Validation\Rule;
 
 class subscribeController extends Controller
 {
+    public function subscribeShow()
+    {
+        return view('subscribe');
+    }
 
     public function subscribe(Request $request)
     {
