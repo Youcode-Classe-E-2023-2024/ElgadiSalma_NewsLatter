@@ -27,7 +27,6 @@ class userController extends Controller
             return to_route('dashboard')->with('success', 'Vous êtes bien connecté '.$email." .");
 
         }else{
-            // shi haja ghalta
             return back()->withErrors([
             'email'=> 'Email ou mot de passe incorrect.'
             ])->onlyInput('email');
@@ -39,8 +38,6 @@ class userController extends Controller
         Auth::logout(); 
 
         return redirect()->route('login'); 
-        // return view('login');
-
     }
 
 }
