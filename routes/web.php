@@ -33,3 +33,4 @@ Route::get('/', [userController::class,'index'])->name('login.show');
 Route::post('/login', [userController::class,'login'])->name('login');
 
 Route::post('/logout', [userController::class,'logout'])->name('logout');
+
