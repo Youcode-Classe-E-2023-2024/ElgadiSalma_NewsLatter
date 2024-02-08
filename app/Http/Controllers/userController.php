@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use App\Mail\ForgotPasswordMail;
 
 class userController extends Controller
 {
@@ -51,27 +52,63 @@ class userController extends Controller
     {
         return view('forgot-password');
     }
+    public function reset($token)
+    {
+        $user = User::where('remember_token','=',$token)->first();
+        if(!empty($user))
+        {
+            $data['user'] = $user;
+            return view ('reset-password',$data);
+        }else{
+            abort(404);
+        }
+    }
 
-    public function reset(Request $request)
+    public function forgot_password(Request $request)
     {
         $request->validate([
-            'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|string|confirmed|min:8',
         ]);
 
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user) use ($request) {
-                $user->forceFill([
-                    'password' => Hash::make($request->password),
-                    'remember_token' => Str::random(60)
-                ])->save();
-            }
-        );
+        $email = $request->input('email');
+        $user = User::where('email', $email)->first();
+        if(!empty($user))
+        {
+            $user->remember_token = Str::random(40);
+            $user->save();
 
-        return $status == Password::PASSWORD_RESET
-            ? redirect()->route('login.show')->with('status', __($status))
-            : back()->withInput($request->only('email'))->withErrors(['email' => __($status)]);
+            Mail::to($user->email)->send(new ForgotPasswordMail($user));
+            
+            return redirect()->back()->with('success', 'Check ur email');
+
+        }else{
+            return back()->withErrors([
+                'email'=> 'Email non trouvé.'
+                ])->onlyInput('email');
+        }
     }
+
+    public function post_reset($token, Request $request)
+    {
+        $user = User::where('remember_token','=',$token)->first();
+        if(!empty($user))
+        {
+            if($request->password == $request->confirm_password)
+            {
+                $user->password = Hash::make($request->password);
+                $user->remember_token = Str::random(40);
+                $user->save();
+
+                return redirect('login')->with('success', 'Mots de passe change avec success');
+
+            }else{
+                return redirect()->back()->with('error', 'Mots de passe non identiques');
+            }
+        }else{
+            abort(404);
+        }
+    }
+
 }
+
+
