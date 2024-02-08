@@ -38,6 +38,13 @@
                         <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="password" id="password" placeholder="password" />
                     </div>
 
+                    <div>
+                        <label for="remember">
+                            <input id="remember" type="checkbox" name="remember">
+                            <span class="">Remember Me</span>
+                        </label>
+                    </div>
+
                     <button type="submit" class="w-full mt-6 bg-purple-400 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans">Login</button>
                 </form>
                 
