@@ -38,11 +38,15 @@
                         <input class="w-full bg-gray-100 px-4 py-2 rounded-lg focus:outline-none" type="text" name="password" id="password" placeholder="password" />
                     </div>
 
-                    <div>
+                    <div class="flex justify-between pt-5">
                         <label for="remember">
                             <input id="remember" type="checkbox" name="remember">
                             <span class="">Remember Me</span>
                         </label>
+
+                        <a class="no-underline hover:underline text-blue-dark text-mg" href="{{ route('forgot_password') }}">
+                            Forgot Your Password?
+                        </a>
                     </div>
 
                     <button type="submit" class="w-full mt-6 bg-purple-400 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans">Login</button>
