@@ -15,22 +15,20 @@ class userController extends Controller
     {
         return view('login');
     } 
+    
     public function login(Request $request)
     {
-        $email = $request->email;
-        $password = $request->password;
-        $credentials = ['email' => $email , 'password' => $password ];
-        if(Auth::attempt($credentials))
-        {
-            $profile = Auth::user();
-            $request->session()->regenerate(true); 
-            return to_route('dashboard')->with('success', 'Vous êtes bien connecté '.$email." .");
+        $credentials = $request->only('email', 'password');
 
-        }else{
-            return back()->withErrors([
-            'email'=> 'Email ou mot de passe incorrect.'
-            ])->onlyInput('email');
-        }
+    if (Auth::attempt($credentials, $request->filled('remember'))) {
+        $request->session()->regenerate();
+
+        return to_route('dashboard')->with('success', 'Vous êtes bien connecté ');
+    }
+
+    return back()->withErrors([
+        'email'=> 'Email ou mot de passe incorrect.'
+        ])->onlyInput('email');
     }
 
     public function logout()
