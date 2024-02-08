@@ -16,9 +16,10 @@ use App\Http\Controllers\userController;
 |
 */
 
-// Route::get('/subscribe', function () {
-//     return view('subscribe');
+// Route::get('/', function () {
+//     return "dd";
 // });
+
 
 Route::middleware(['auth.check'])->group(function () 
 {
