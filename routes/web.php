@@ -25,6 +25,9 @@ Route::post('/login', [userController::class,'login'])->name('login');
 
 Route::post('/logout', [userController::class,'logout'])->name('logout');
 
-Route::post('/forgot-password', [userController::class, 'store']);
+Route::post('/forgot-password', [userController::class, 'forgot_password'])->name('forgot_password');
 Route::get('/forgot-password', [userController::class, 'forgot_show']);
-Route::post('/forgot-password/{token}', [userController::class, 'reset']);
+
+Route::get('/reset-password/{token}', [userController::class, 'reset']);
+Route::post('/reset-password/{token}', [userController::class, 'post_reset'])->name('post_reset');
+
