@@ -54,12 +54,13 @@ class userController extends Controller
     }
     public function reset($token)
     {
-        $user = User::where('remember_token','=',$token)->first();
-        if(!empty($user))
-        {
+        $user = User::where('remember_token', $token)->first();
+    
+        if (!empty($user)) {
             $data['user'] = $user;
-            return view ('reset-password',$data);
-        }else{
+            $data['token'] = $token; // Pass the token to the view
+            return view('reset-password', $data);
+        } else {
             abort(404);
         }
     }
@@ -79,8 +80,9 @@ class userController extends Controller
 
             Mail::to($user->email)->send(new ForgotPasswordMail($user));
             
-            return redirect()->back()->with('success', 'Check ur email');
-
+            return back()->withErrors([
+                'email'=> 'Check ton email'
+                ])->onlyInput('email');
         }else{
             return back()->withErrors([
                 'email'=> 'Email non trouvé.'
@@ -99,7 +101,7 @@ class userController extends Controller
                 $user->remember_token = Str::random(40);
                 $user->save();
 
-                return redirect('login')->with('success', 'Mots de passe change avec success');
+                return redirect()->route('login.show'); 
 
             }else{
                 return redirect()->back()->with('error', 'Mots de passe non identiques');
@@ -108,6 +110,8 @@ class userController extends Controller
             abort(404);
         }
     }
+
+    
 
 }
 
