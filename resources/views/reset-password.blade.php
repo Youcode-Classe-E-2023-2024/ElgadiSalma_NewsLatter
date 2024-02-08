@@ -13,7 +13,7 @@
     </head>
     <body>
         <section class="grid h-screen place-content-center">
-          <form action="{{route('post_reset')}}" method="POST">
+          <form action="{{ route('post_reset', ['token' => $token]) }}" method="POST">
             @csrf
             <div class="mb-10 text-center text-indigo-400">
               <h1 class="text-3xl font-bold tracking-widest">Reset ur passwrd</h1>
