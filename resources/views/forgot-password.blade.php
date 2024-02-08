@@ -13,7 +13,7 @@
     </head>
     <body>
         <div>
-            <main id="content" class="w-full max-w-md mx-auto p-6 ">
+            <main id="content" class="w-full max-w-md mx-auto p-6 pt-52">
                 <div class="mt-7 bg-white rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-4 sm:p-7">
                     <div class="text-center">
@@ -27,8 +27,12 @@
                     </div>
             
                     <div class="mt-5">
-                    <form>
+                    <form method="POST" action="{{route('forgot_password')}}">
+                        @csrf
                         <div class="grid gap-y-4">
+                        @error('email')
+                            <span class="text-red-500">{{$message}}</span>
+                        @enderror
                         <div>
                             <label for="email" class="block text-sm font-bold ml-1 mb-2 dark:text-white">Email address</label>
                             <div class="relative">
