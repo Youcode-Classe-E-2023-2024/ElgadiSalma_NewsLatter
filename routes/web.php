@@ -28,6 +28,6 @@ Route::post('/logout', [userController::class,'logout'])->name('logout');
 Route::post('/forgot-password', [userController::class, 'forgot_password'])->name('forgot_password');
 Route::get('/forgot-password', [userController::class, 'forgot_show']);
 
-Route::get('/reset-password/{token}', [userController::class, 'reset']);
+Route::get('/reset-password/{token}', [userController::class, 'reset'])->name('reset');
 Route::post('/reset-password/{token}', [userController::class, 'post_reset'])->name('post_reset');
 
