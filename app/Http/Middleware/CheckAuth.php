@@ -21,6 +21,6 @@ class CheckAuth
             return $next($request);
         }
 
-        return redirect()->route('login')->with('error', 'Vous devez être connecté pour accéder à cette page.');    
+        return redirect()->route('login.show')->with('error', 'Vous devez être connecté pour accéder à cette page.');    
     }
 }
