@@ -5,17 +5,6 @@ use App\Http\Controllers\newsController;
 use App\Http\Controllers\subscribeController;
 use App\Http\Controllers\userController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 // Route::get('/', function () {
 //     return "dd";
 // });
@@ -35,3 +24,7 @@ Route::get('/', [userController::class,'index'])->name('login.show');
 Route::post('/login', [userController::class,'login'])->name('login');
 
 Route::post('/logout', [userController::class,'logout'])->name('logout');
+
+Route::post('/forgot-password', [userController::class, 'store']);
+Route::get('/forgot-password', [userController::class, 'forgot_show']);
+Route::post('/forgot-password/{token}', [userController::class, 'reset']);
