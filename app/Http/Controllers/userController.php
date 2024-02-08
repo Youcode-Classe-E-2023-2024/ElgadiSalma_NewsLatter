@@ -20,22 +20,22 @@ class userController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-    if (Auth::attempt($credentials, $request->filled('remember'))) {
-        $request->session()->regenerate();
-
-        return to_route('dashboard')->with('success', 'Vous êtes bien connecté ');
-    }
-
-    return back()->withErrors([
-        'email'=> 'Email ou mot de passe incorrect.'
-        ])->onlyInput('email');
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            $request->session()->regenerate();
+    
+            return to_route('dashboard')->with('success', 'Vous êtes bien connecté ');
+        }
+    
+        return back()->withErrors([
+            'email'=> 'Email ou mot de passe incorrect.'
+            ])->onlyInput('email');
     }
 
     public function logout()
     {
         Auth::logout(); 
 
-        return redirect()->route('login'); 
+        return redirect()->route('login.show'); 
     }
 
 }
