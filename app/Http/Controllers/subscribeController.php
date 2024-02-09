@@ -76,4 +76,18 @@ class subscribeController extends Controller
         ]);
     }
 
+    public function showSubscriberList()
+    {
+        $subscribers = Subscriber::orderBy('created_at', 'desc')->get();
+        return view('subscribers', ['subscribers' => $subscribers]);
+    }
+
+    public function deleteSubscriber(Subscriber $subscriber)
+    {
+        $subscriber->delete();
+        return to_route('list.subscribers')->with('success', 'Supprimé avec succés');
+    }
+
+
 }
+
