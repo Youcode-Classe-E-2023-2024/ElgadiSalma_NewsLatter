@@ -7,6 +7,8 @@ use App\Models\Subscriber;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth; 
+
 
 
 class subscribeController extends Controller
@@ -23,7 +25,7 @@ class subscribeController extends Controller
                 'email' => [
                     'required',
                     'email',
-                    Rule::unique('subsribers', 'email'),
+                    Rule::unique('subscribers', 'email'),
                 ],             
             ]);
         } catch (ValidationException $e) {
@@ -82,10 +84,11 @@ class subscribeController extends Controller
         return view('subscribers', ['subscribers' => $subscribers]);
     }
 
-    public function deleteSubscriber(Subscriber $subscriber)
+    public function deleteSubscriber($id)
     {
+        $subscriber = Subscriber::find($id);
         $subscriber->delete();
-        return to_route('list.subscribers')->with('success', 'Supprimé avec succés');
+        return redirect()->route('list.subscribers')->with('success', 'Supprimé avec succès');
     }
 
 
