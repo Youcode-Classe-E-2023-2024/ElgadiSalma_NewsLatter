@@ -14,7 +14,7 @@ class Subscriber extends Model
         'status',
     ];
 
-    protected $table = 'subsribers';
+    protected $table = 'subscribers';
 
 }
 

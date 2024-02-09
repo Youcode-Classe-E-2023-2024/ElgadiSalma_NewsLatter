@@ -27,16 +27,16 @@
             <!-- navbar -->
             <nav class="flex justify-between bg-gray-900 text-white w-screen">
                 <div class="px-5 xl:px-12 py-6 flex w-full items-center">
-                    <a class="text-3xl font-bold font-heading" href="#">
+                    <a class="text-3xl font-bold font-heading" href="{{route('showSubscriberStatistics')}}">
                     NewsLetters
                     </a>
                     <!-- Nav Links -->
                     <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
 
                     @if(auth()->check() && auth()->user()->role === 0)
-                    <li><a class="hover:text-gray-200" href="#">Dashboard</a></li>
+                    <li><a class="hover:text-gray-200" href="{{route('showSubscriberStatistics')}}">Dashboard</a></li>
                     <li><a class="hover:text-gray-200" href="#">Permissions</a></li>
-                    <li><a class="hover:text-gray-200" href="#">Subscribers</a></li>
+                    <li><a class="hover:text-gray-200" href="{{route('list.subscribers')}}">Subscribers</a></li>
                     @endif
                     
                     <li><a class="hover:text-gray-200" href="#">Templates</a></li>
