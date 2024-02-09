@@ -10,6 +10,9 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
         <!-- Styles -->
         <style>
@@ -25,14 +28,24 @@
             <nav class="flex justify-between bg-gray-900 text-white w-screen">
                 <div class="px-5 xl:px-12 py-6 flex w-full items-center">
                     <a class="text-3xl font-bold font-heading" href="#">
-                    NewsLatters
+                    NewsLetters
                     </a>
                     <!-- Nav Links -->
                     <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-                    <li><a class="hover:text-gray-200" href="#">Home</a></li>
-                    <li><a class="hover:text-gray-200" href="#">Catagory</a></li>
-                    <li><a class="hover:text-gray-200" href="#">Collections</a></li>
-                    <li><a class="hover:text-gray-200" href="#">Contact Us</a></li>
+
+                    @if(auth()->check() && auth()->user()->role === 0)
+                    <li><a class="hover:text-gray-200" href="#">Dashboard</a></li>
+                    <li><a class="hover:text-gray-200" href="#">Permissions</a></li>
+                    <li><a class="hover:text-gray-200" href="#">Subscribers</a></li>
+                    @endif
+                    
+                    <li><a class="hover:text-gray-200" href="#">Templates</a></li>
+
+                    @if(auth()->check() && auth()->user()->role === 1)
+                    <li><a class="hover:text-gray-200" href="#">Templates</a></li>
+                    <li><a class="hover:text-gray-200" href="#">Add Template</a></li>
+                    @endif
+
                     </ul>
                     <!-- Header Icons -->
                     
@@ -59,10 +72,8 @@
         {{-- end navbar --}}
 
 
-        <div>
             {{-- content goes here --}}
             @yield('content');
-        </div>
 
 
     </body>

@@ -18,9 +18,11 @@ class CheckAuth
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
+            
             return $next($request);
         }
 
         return redirect()->route('login.show')->with('error', 'Vous devez être connecté pour accéder à cette page.');    
+        
     }
 }

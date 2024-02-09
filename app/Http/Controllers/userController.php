@@ -27,7 +27,12 @@ class userController extends Controller
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
     
-            return to_route('dashboard')->with('success', 'Vous êtes bien connecté ');
+            if (auth()->user()->role === 0) {
+                return redirect()->route('showSubscriberStatistics')->with('success', 'Vous êtes bien connecté ');
+                
+            } elseif (auth()->user()->role === 1) {
+                return redirect()->route('templates')->with('success', 'Vous êtes bien connecté ');
+            }        
         }
     
         return back()->withErrors([

@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 
 class newsController extends Controller
 {
-    public function dashboard()
+    // public function dashboard()
+    // {
+    //     return view('dashboard');
+
+    // }
+
+    public function templates()
     {
-        return view('dashboard');
+        return view('templates');
 
     }
 }

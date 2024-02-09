@@ -12,7 +12,9 @@ use App\Http\Controllers\userController;
 
 Route::middleware(['auth.check'])->group(function () 
 {
-    Route::get('/dashboard', [newsController::class,'dashboard'])->name('dashboard');
+    
+    Route::get('/dashboard', [subscribeController::class,'showSubscriberStatistics'])->name('showSubscriberStatistics');
+    Route::get('/templates', [newsController::class,'templates'])->name('templates');
   
 });
 
