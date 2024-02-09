@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Subscriber;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 
 class subscribeController extends Controller
@@ -56,4 +57,23 @@ class subscribeController extends Controller
 
         return back()->with('success', 'Vous avez été désabonné avec succès.');
     }
+
+    public function showSubscriberStatistics()
+    {
+        $subscriberStatistics = Subscriber::select(
+            DB::raw('DATE(created_at) as date'),
+            DB::raw('COUNT(*) as subscriber_count')
+        )
+        ->groupBy('date')
+        ->get();
+
+        // Nombre total d'abonnés
+        $totalSubscribers = Subscriber::count();
+
+        return view('dashboard', [
+            'subscriberStatistics' => $subscriberStatistics,
+            'totalSubscribers' => $totalSubscribers
+        ]);
+    }
+
 }
