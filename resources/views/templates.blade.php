@@ -1,3 +1,5 @@
-<div>
-    <!-- An unexamined life is not worth living. - Socrates -->
-</div>
+@extends('layout')
+
+@section('content')
+<h1>auteur</h1>
+@endsection
