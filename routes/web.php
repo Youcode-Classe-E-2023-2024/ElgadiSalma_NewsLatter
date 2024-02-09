@@ -14,8 +14,10 @@ Route::middleware(['auth.check'])->group(function ()
 {
     
     Route::get('/dashboard', [subscribeController::class,'showSubscriberStatistics'])->name('showSubscriberStatistics');
+
     Route::get('/subscribers', [subscribeController::class,'showSubscriberList'])->name('list.subscribers');    
-    Route::delete('/subscribers/{id}', [subscribeController::class,'deleteSubscriber'])->name('delete.subscriber');    
+    Route::delete('/subscribers/{id}', [subscribeController::class,'deleteSubscriber'])->name('delete.subscriber'); 
+
     Route::get('/templates', [newsController::class,'templates'])->name('templates');
   
 });
