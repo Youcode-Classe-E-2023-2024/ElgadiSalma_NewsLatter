@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\newsController;
 use App\Http\Controllers\subscribeController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\mediaController;
 
 // Route::get('/', function () {
 //     return "dd";
@@ -17,6 +18,8 @@ Route::middleware(['auth.check'])->group(function ()
 
     Route::get('/subscribers', [subscribeController::class,'showSubscriberList'])->name('list.subscribers');    
     Route::delete('/subscribers/{id}', [subscribeController::class,'deleteSubscriber'])->name('delete.subscriber'); 
+
+    Route::get('/media', [mediaController::class,'showMedia'])->name('media.show');    
 
     Route::get('/templates', [newsController::class,'templates'])->name('templates');
   
