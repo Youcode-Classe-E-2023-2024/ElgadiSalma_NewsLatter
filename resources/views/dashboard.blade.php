@@ -69,6 +69,12 @@
                 }
             }
         });
+
+        function pdf()
+        {
+            const element = document.getElementById('statistique');
+            html2pdf(element);
+        }
           
 </script>
 
