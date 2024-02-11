@@ -36,6 +36,7 @@
                     @if(auth()->check() && auth()->user()->role === 0)
                     <li><a class="hover:text-gray-200" href="{{route('showSubscriberStatistics')}}">Dashboard</a></li>
                     <li><a class="hover:text-gray-200" href="#">Permissions</a></li>
+                    <li><a class="hover:text-gray-200" href="{{route('media.show')}}">Media</a></li>
                     <li><a class="hover:text-gray-200" href="{{route('list.subscribers')}}">Subscribers</a></li>
                     @endif
                     

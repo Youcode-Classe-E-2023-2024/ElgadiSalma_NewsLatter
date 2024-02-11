@@ -50,7 +50,6 @@ class userController extends Controller
         return redirect()->route('login.show'); 
     }
 
-
     // forgot pass
 
     public function forgot_show()
@@ -94,7 +93,6 @@ class userController extends Controller
                 ])->onlyInput('email');
         }
     }
-
     public function post_reset($token, Request $request)
     {
         $user = User::where('remember_token','=',$token)->first();
