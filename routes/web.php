@@ -20,6 +20,8 @@ Route::middleware(['auth.check'])->group(function ()
     Route::delete('/subscribers/{id}', [subscribeController::class,'deleteSubscriber'])->name('delete.subscriber'); 
 
     Route::get('/media', [mediaController::class,'showMedia'])->name('media.show');    
+    Route::post('/media', [mediaController::class,'addMedia'])->name('add.media');    
+    Route::delete('/media/{id}', [mediaController::class,'deleteMedia'])->name('delete.media');    
 
     Route::get('/templates', [newsController::class,'templates'])->name('templates');
   
