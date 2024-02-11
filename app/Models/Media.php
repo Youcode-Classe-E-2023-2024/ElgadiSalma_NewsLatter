@@ -10,7 +10,8 @@ class Media extends Model
     use HasFactory;
 
     protected $fillable = [
-        'image',
+        'photo',
+        'type',
     ];
 
     protected $table = 'media';
