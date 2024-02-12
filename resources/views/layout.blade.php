@@ -32,11 +32,11 @@
                     </a>
                     <!-- Nav Links -->
                     <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+                    <li><a class="hover:text-gray-200" href="{{route('media.show')}}">Media</a></li>
 
                     @if(auth()->check() && auth()->user()->role === 0)
                     <li><a class="hover:text-gray-200" href="{{route('showSubscriberStatistics')}}">Dashboard</a></li>
                     <li><a class="hover:text-gray-200" href="#">Permissions</a></li>
-                    <li><a class="hover:text-gray-200" href="{{route('media.show')}}">Media</a></li>
                     <li><a class="hover:text-gray-200" href="{{route('list.subscribers')}}">Subscribers</a></li>
                     @endif
                     
@@ -44,7 +44,7 @@
 
                     @if(auth()->check() && auth()->user()->role === 1)
                     <li><a class="hover:text-gray-200" href="#">Templates</a></li>
-                    <li><a class="hover:text-gray-200" href="#">Add Template</a></li>
+                    <li><a class="hover:text-gray-200" href="{{route('addTemplate.show')}}">Add Template</a></li>
                     @endif
 
                     </ul>
