@@ -6,7 +6,7 @@
 
     @auth
     @if(auth()->user()->role === 0)
-    <form class="w-full max-w-lg m-4 pt-5" method="POST" action="{{ route('add.media') }}" enctype="multipart/form-data">
+    <form class="w-full max-w-lg m-4 pt-5" method="POST" action="" enctype="multipart/form-data">
         @csrf
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
