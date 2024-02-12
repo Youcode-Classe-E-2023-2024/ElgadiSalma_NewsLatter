@@ -11,4 +11,9 @@ class newsController extends Controller
         return view('templates');
 
     }
+
+    public function addTemplate_show()
+    {
+        return view('addTemplate');
+    }
 }
