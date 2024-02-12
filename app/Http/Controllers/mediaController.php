@@ -13,46 +13,46 @@ class mediaController extends Controller
         return view('media', ['medias' => $medias]);
     }
 
-    public function addMedia(Request $request)
-    {
-        $request->validate([
-            'photo' => 'required|file|max:20480',
-        ]);
+    // public function addMedia(Request $request)
+    // {
+    //     $request->validate([
+    //         'photo' => 'required|file|max:20480',
+    //     ]);
     
-        $photo = $request->file('photo');
+    //     $photo = $request->file('photo');
     
-        if ($photo->isValid() && strpos($photo->getMimeType(), 'image') !== false) {
-            $imageName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-            $imageExtension = $photo->getClientOriginalExtension();
-            $imageFullName = $imageName . '_' . time() . '.' . $imageExtension;
+    //     if ($photo->isValid() && strpos($photo->getMimeType(), 'image') !== false) {
+    //         $imageName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+    //         $imageExtension = $photo->getClientOriginalExtension();
+    //         $imageFullName = $imageName . '_' . time() . '.' . $imageExtension;
     
-            $photo->move(public_path('storage/media/images'), $imageFullName);
+    //         $photo->move(public_path('storage/media/images'), $imageFullName);
     
-            Media::create([
-                'type' => 'image',
-                'photo' => $imageFullName,
-            ]);
+    //         Media::create([
+    //             'type' => 'image',
+    //             'photo' => $imageFullName,
+    //         ]);
     
-            return redirect()->route('media.show')->with('success', 'Image bien ajoutée.');
-        }
+    //         return redirect()->route('media.show')->with('success', 'Image bien ajoutée.');
+    //     }
 
-        elseif ($photo->isValid() && strpos($photo->getMimeType(), 'video') !== false) {
-            $videoName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-            $videoExtension = $photo->getClientOriginalExtension();
-            $videoFullName = $videoName . '_' . time() . '.' . $videoExtension;
+    //     elseif ($photo->isValid() && strpos($photo->getMimeType(), 'video') !== false) {
+    //         $videoName = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+    //         $videoExtension = $photo->getClientOriginalExtension();
+    //         $videoFullName = $videoName . '_' . time() . '.' . $videoExtension;
     
-            $photo->move(public_path('storage/media/videos'), $videoFullName);
+    //         $photo->move(public_path('storage/media/videos'), $videoFullName);
     
-            Media::create([
-                'type' => 'video',
-                'photo' => $videoFullName,
-            ]);
+    //         Media::create([
+    //             'type' => 'video',
+    //             'photo' => $videoFullName,
+    //         ]);
     
-            return redirect()->route('media.show')->with('success', 'Vidéo bien ajoutée.');
-        } else {
-            return redirect()->route('media.show')->with('error', 'Format de fichier non pris en charge.');
-        }
-    }
+    //         return redirect()->route('media.show')->with('success', 'Vidéo bien ajoutée.');
+    //     } else {
+    //         return redirect()->route('media.show')->with('error', 'Format de fichier non pris en charge.');
+    //     }
+    // }
 
     public function deleteMedia($id)
     {
