@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Medias;
+use App\Models\News;
+
 
 class newsController extends Controller
 {
@@ -14,6 +17,12 @@ class newsController extends Controller
 
     public function addTemplate_show()
     {
-        return view('addTemplate');
+        $medias = Medias::orderBy('created_at', 'desc')->get();        
+        return view('addTemplate', ['medias' => $medias]);
+    }
+
+    public function addTemplate()
+    {
+        
     }
 }
