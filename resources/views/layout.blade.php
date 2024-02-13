@@ -38,10 +38,9 @@
                     <li><a class="hover:text-gray-200" href="{{route('showSubscriberStatistics')}}">Dashboard</a></li>
                     <li><a class="hover:text-gray-200" href="#">Permissions</a></li>
                     <li><a class="hover:text-gray-200" href="{{route('list.subscribers')}}">Subscribers</a></li>
+                    <li><a class="hover:text-gray-200" href="{{route('admin.template')}}">Templates</a></li>
                     @endif
                     
-                    <li><a class="hover:text-gray-200" href="#">Templates</a></li>
-
                     @if(auth()->check() && auth()->user()->role === 1)
                     <li><a class="hover:text-gray-200" href="{{route('templates')}}">Templates</a></li>
                     <li><a class="hover:text-gray-200" href="{{route('addTemplate.show')}}">Add Template</a></li>
