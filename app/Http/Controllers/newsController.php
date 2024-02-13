@@ -11,8 +11,8 @@ class newsController extends Controller
 {
     public function templates()
     {
-        return view('templates');
-
+        $news = News::orderBy('created_at', 'desc')->get();
+        return view('templates', ['news' => $news]);
     }
 
     public function addTemplate_show()
@@ -35,6 +35,31 @@ class newsController extends Controller
             'description' => $request->input('description'),
         ]);
 
-        return redirect()->route('addTemplate.show')->with('success', 'Image bien ajoutée.');
+        return redirect()->route('templates')->with('success', 'Image bien ajoutée.');
     }
+
+    public function editTemplate(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        $news = News::findOrFail($id);
+
+        $news->title = $request->input('title');
+        $news->description = $request->input('description');
+        
+        $news->save();
+
+        return redirect()->route('templates')->with('success', 'Image bien ajoutée.');
+    }
+
+    public function deleteTemplate($id)
+    {
+        $new = News::find($id);
+        $new->delete();
+        return redirect()->route('templates')->with('success', 'Image bien ajoutée.');
+    } 
+
 }
