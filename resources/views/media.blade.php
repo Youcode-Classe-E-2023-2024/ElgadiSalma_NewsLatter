@@ -40,8 +40,7 @@
                     <div key={content} class="group relative rounded-lg overflow-hidden bg-white hover:shadow-2xl border-2">
                         @if ($mediaItem->type == 'image')
                             <div class="p-4">
-                                <img src="{{ $mediaItem->getUrl() }}" alt=''
-                                    class="h-72 w-full object-cover object-center">
+                                <img src="{{ $mediaItem->getUrl() }}" alt='' class="h-72 w-full object-cover object-center">
                             </div>
                         @elseif($mediaItem->type == 'video')
                             <div class="p-4">
