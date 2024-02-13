@@ -64,9 +64,11 @@ class newsController extends Controller
 
     public function showDeletedTemplates()
     {
-        $news = News::onlyTrashed()->get();
+        $news = News::orderBy('created_at', 'desc')->get();
 
-        return view('adminTemplates', compact('news'));
+        $deletedNews = News::onlyTrashed()->get();
+
+        return view('adminTemplates', compact('deletedNews', 'news'));
     }
     public function restoreTemplate($id)
     {
