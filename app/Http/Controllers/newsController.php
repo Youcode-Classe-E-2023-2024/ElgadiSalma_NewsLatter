@@ -21,8 +21,20 @@ class newsController extends Controller
         return view('addTemplate', ['medias' => $medias]);
     }
 
-    public function addTemplate()
+    public function addTemplate(Request $request)
     {
-        
+        $request->validate([
+            'title' => 'required',
+            'media' => 'required',
+            'description' => 'required',
+        ]);
+
+        News::create([
+            'title' => $request->input('title'),
+            'media' => $request->input('media'),
+            'description' => $request->input('description'),
+        ]);
+
+        return redirect()->route('addTemplate.show')->with('success', 'Image bien ajoutée.');
     }
 }
