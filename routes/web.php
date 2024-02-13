@@ -24,6 +24,8 @@ Route::middleware(['auth.check'])->group(function ()
     Route::delete('/media/{id}', [mediaController::class,'deleteMedia'])->name('delete.media');    
 
     Route::get('/templates', [newsController::class,'templates'])->name('templates');
+    Route::post('/templates/{id}', [newsController::class,'editTemplate'])->name('edit.template');
+    Route::delete('/templates/{id}', [newsController::class,'deleteTemplate'])->name('delete.template');
 
     Route::get('/addTemplate',[newsController::class,'addTemplate_show'])->name('addTemplate.show');
     Route::post('/addTemplate',[newsController::class,'addTemplate'])->name('addTemplate');
