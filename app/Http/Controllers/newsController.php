@@ -62,4 +62,17 @@ class newsController extends Controller
         return redirect()->route('templates')->with('success', 'Image bien ajoutée.');
     } 
 
+    public function showDeletedTemplates()
+    {
+        $news = News::onlyTrashed()->get();
+
+        return view('adminTemplates', compact('news'));
+    }
+    public function restoreTemplate($id)
+    {
+        $news = News::withTrashed()->find($id);
+        $news->restore();
+        return redirect()->back()->with('success', 'template restored successfully!');
+    }
+
 }
