@@ -26,6 +26,7 @@ Route::middleware(['auth.check'])->group(function ()
     Route::get('/templates', [newsController::class,'templates'])->name('templates');
 
     Route::get('/addTemplate',[newsController::class,'addTemplate_show'])->name('addTemplate.show');
+    Route::post('/addTemplate',[newsController::class,'addTemplate'])->name('addTemplate');
   
 });
 
