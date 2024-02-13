@@ -43,7 +43,7 @@
                     <li><a class="hover:text-gray-200" href="#">Templates</a></li>
 
                     @if(auth()->check() && auth()->user()->role === 1)
-                    <li><a class="hover:text-gray-200" href="#">Templates</a></li>
+                    <li><a class="hover:text-gray-200" href="{{route('templates')}}">Templates</a></li>
                     <li><a class="hover:text-gray-200" href="{{route('addTemplate.show')}}">Add Template</a></li>
                     @endif
 
