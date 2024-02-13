@@ -23,29 +23,37 @@
 
           <div class="w-full px-3 sm:w-1/2">
             <div class="mb-5">
-              <label for="media" class="mb-3 block text-base font-medium text-[#07074D]">
-                Media 
-              </label>
-              <select name="media" id="media" class="w-full rounded-md border border-gray-300 text-[#6B7280]" required>
-                <option value="" selected disabled>Choisir un média</option>
-                @foreach ($medias as $media)
-                  @foreach ($media->getMedia() as $mediaItem)                  
-                    <option value="{{ $media->id }}">
-                      @if ($mediaItem->type == 'image')
-                        <img src="{{ $mediaItem->getUrl() }}" alt='' class="h-72 w-full object-cover object-center">
-                      @elseif($mediaItem->type == 'video')
-                        <video controls class="h-72 w-full object-cover object-center">
-                          <source src="{{ $mediaItem->getUrl() }}" type="video/mp4">
-                        </video>
-                      @endif
-                    </option>
-                  @endforeach
-                @endforeach
-                </select>
-            </div>
-          </div>
+                <label for="media" class="mb-3 block text-base font-medium ">
+                    Media 
+                </label>
+                <div class="rounded-md border border-[#e0e0e0] p-1 outline-none flex">
+                    <input type="text" id="selectedMedia" name="media" placeholder="Media" class="rounded w-full pb-2 py-2 px-3 placeholder-gray-500 outline-none" style="width: 35rem;">   
+                    <div class="absolute max-h-40 mt-12 z-10 mt-2 bg-white border border-gray-300 rounded-md shadow-lg  hidden" id="dropdownContent">
+                        @foreach ($medias as $media)
+                            @foreach ($media->getMedia() as $mediaItem)                  
+                                <div class="title bg-gray-100 border p-2 border-gray-300 w-full outline-none">
+                                    <label>
+                                        @if ($mediaItem->type == 'image')
+                                            <img src="{{ $mediaItem->getUrl() }}" alt='' class="h-20 w-full object-cover object-center inline-block mr-2" onclick="selectMedia('{{ $mediaItem->getUrl() }}')">                     
+                                        @elseif($mediaItem->type == 'video')
+                                            <video controls class="h-24 w-full" onclick="selectMedia('{{ $mediaItem->getUrl() }}')">
+                                                <source src="{{ $mediaItem->getUrl() }}" type="video/mp4">
+                                            </video>
+                                        @endif
+                                    </label>
+                                </div>                          
+                            @endforeach
+                        @endforeach
+                    </div> 
+                    <div class="m-2">
+                        <button type="button" onclick="toggleDropdown()">^_^</button>
+                    </div>           
+                </div>
+            </div>    
+        </div>   
 
-        </div>
+</div>
+
 
         <div class="mb-5">
           <label class="mb-3 block text-base font-medium text-[#07074D]">
@@ -70,4 +78,20 @@
   </div>
 </div>
 
+
+<script>
+  function toggleDropdown()
+  {
+        var dropdown = document.getElementById('dropdownContent');
+        dropdown.classList.toggle('hidden');
+  }
+
+  function selectMedia(url) 
+  {
+      var selectedMediaInput = document.getElementById("selectedMedia");
+      selectedMediaInput.value = url;
+      toggleDropdown();
+  }
+
+</script>
 @endsection
