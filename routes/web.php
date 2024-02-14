@@ -17,7 +17,7 @@ Route::middleware(['auth.check'])->group(function ()
     Route::get('/dashboard', [subscribeController::class,'showSubscriberStatistics'])->name('showSubscriberStatistics');
 
     Route::get('/template', [newsController::class,'showDeletedTemplates'])->name('admin.template');
-    Route::post('/template/{id}', [newsController::class,'restoreTemplate'])->name('restore.template');    
+    Route::post('/templat/{id}', [newsController::class,'restoreTemplate'])->name('restore.template');    
     Route::post('/template/{id}', [newsController::class,'sendTemplate'])->name('send.newsletter');    
 
     Route::get('/subscribers', [subscribeController::class,'showSubscriberList'])->name('list.subscribers');    
