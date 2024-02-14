@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewsLetter;
 use Illuminate\Http\Request;
 use App\Models\Medias;
 use App\Models\News;
+use App\Models\Subscriber;
+use Illuminate\Support\Facades\Mail;
+
 
 
 class newsController extends Controller
@@ -75,6 +79,21 @@ class newsController extends Controller
         $news = News::withTrashed()->find($id);
         $news->restore();
         return redirect()->back()->with('success', 'template restored successfully!');
+    }
+
+    public function sendTemplate($id)
+    {
+        $template = News::find($id);
+
+        // Récupérez la liste des abonnés
+        $subscribers = Subscriber::all();
+    
+        // Envoie de l'e-mail à chaque abonné
+        foreach ($subscribers as $subscriber) {
+            Mail::to($subscriber->email)->send(new NewsLetter($template));
+        }
+    
+        return redirect()->back()->with('success', 'La newsletter a été envoyée à tous les abonnés.');
     }
 
 }
