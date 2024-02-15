@@ -27,6 +27,7 @@
         </div>
 
         {{-- edit --}}
+        @if (auth()->user()->hasPermission('can-edit'))
         <div class="flex justify-center md:justify-end ">
             <div class="w-[120px] h-[120px] bg-white flex flex-col shadow-lg rounded-xl p-4 flex justify-center items-center">
                 <button class="flex p-4 bg-green-500 rounded-xl hover:rounded-2xl hover:bg-green-600 transition-all duration-300 text-white">
@@ -37,9 +38,11 @@
             </div>
         </div>
         </form>
+        @endif
 
 
         {{-- delete --}}
+        @if (auth()->user()->hasPermission('can-delete'))
         <form action="{{ route('delete.template', $new->id) }}" method="POST">
             @csrf
             @method('DELETE')
@@ -53,6 +56,7 @@
                 </div>
             </div>
         </form>
+        @endif
         
     </div>
     @empty

@@ -17,7 +17,7 @@ Route::middleware(['auth.check'])->group(function ()
     Route::get('/dashboard', [subscribeController::class,'showSubscriberStatistics'])->name('showSubscriberStatistics');
 
     Route::get('/template', [newsController::class,'showDeletedTemplates'])->name('admin.template');
-    Route::post('/template/{id}', [newsController::class,'restoreTemplate'])->name('restore.template');    
+    Route::post('/templat/{id}', [newsController::class,'restoreTemplate'])->name('restore.template');    
     Route::post('/template/{id}', [newsController::class,'sendTemplate'])->name('send.newsletter');    
 
     Route::get('/subscribers', [subscribeController::class,'showSubscriberList'])->name('list.subscribers');    
@@ -39,6 +39,9 @@ Route::middleware(['auth.check'])->group(function ()
 Route::get('/subscribe', [SubscribeController::class, 'subscribeShow'])->name('subscribe.show');
 Route::post('/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe');
 Route::post('/unsubscribe', [SubscribeController::class, 'unsubscribe'])->name('unsubscribe');
+
+Route::post('/register', [userController::class,'register'])->name('register');
+Route::get('/register', [userController::class,'index2'])->name('register.show');
 
 Route::get('/', [userController::class,'index'])->name('login.show');
 Route::post('/login', [userController::class,'login'])->name('login');
