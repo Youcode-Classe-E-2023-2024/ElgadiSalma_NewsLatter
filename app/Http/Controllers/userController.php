@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -19,6 +20,33 @@ class userController extends Controller
     {
         return view('login');
     } 
+    public function index2()
+    {
+        return view('register');
+    } 
+    public function register(Request $request)
+    {
+        // dd($request);
+        $request->validate([
+            'username' => 'required',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email'),
+            ],            
+            'password' => 'required',
+        ]);
+
+        $user = User::create([
+            'name' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+        ]);
+
+        $user->addRole('auteur');
+
+        return view('login');
+    }
     
     public function login(Request $request)
     {
@@ -27,17 +55,16 @@ class userController extends Controller
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
     
-            if (auth()->user()->role === 0) {
                 return redirect()->route('showSubscriberStatistics')->with('success', 'Vous êtes bien connecté ');
                 
-            } elseif (auth()->user()->role === 1) {
-                return redirect()->route('templates')->with('success', 'Vous êtes bien connecté ');
+                // return redirect()->route('templates')->with('success', 'Vous êtes bien connecté ');
             }        
-        }
+        
     
         return back()->withErrors([
             'email'=> 'Email ou mot de passe incorrect.'
             ])->onlyInput('email');
+
     }
 
     public function logout(Request $request)
