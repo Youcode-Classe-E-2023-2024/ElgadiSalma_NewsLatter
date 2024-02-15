@@ -1,4 +1,3 @@
-@if(auth()->check() && auth()->user()->role === 0)
 @extends('layout')
 
 @section('content')
@@ -37,4 +36,3 @@
 
 
 @endsection
-@endif

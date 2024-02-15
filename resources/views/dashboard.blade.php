@@ -1,4 +1,4 @@
-@if(auth()->check() && auth()->user()->role === 0)
+@if (auth()->user()->hasRole('admin'))
 @extends('layout')
 
 @section('content')

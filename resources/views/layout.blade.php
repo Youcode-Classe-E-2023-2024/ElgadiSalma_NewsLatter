@@ -32,19 +32,25 @@
                     </a>
                     <!-- Nav Links -->
                     <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-                    <li><a class="hover:text-gray-200" href="{{route('media.show')}}">Media</a></li>
 
-                    @if(auth()->check() && auth()->user()->role === 0)
+                    @if (auth()->user()->hasRole('admin'))
                     <li><a class="hover:text-gray-200" href="{{route('showSubscriberStatistics')}}">Dashboard</a></li>
-                    <li><a class="hover:text-gray-200" href="#">Permissions</a></li>
+                    <li><a class="hover:text-gray-200" href="{{ route('laratrust.permissions.index') }}">Permissions</a></li>
+                    <li><a class="hover:text-gray-200" href="{{route('list.subscribers')}}">Subscribers</a></li>
+                    @endif
+
+                    @if (auth()->user()->hasRole('sous-admin'))
                     <li><a class="hover:text-gray-200" href="{{route('list.subscribers')}}">Subscribers</a></li>
                     <li><a class="hover:text-gray-200" href="{{route('admin.template')}}">Templates</a></li>
+
                     @endif
-                    
-                    @if(auth()->check() && auth()->user()->role === 1)
+
+                    @if (auth()->user()->hasRole('auteur'))
                     <li><a class="hover:text-gray-200" href="{{route('templates')}}">Templates</a></li>
                     <li><a class="hover:text-gray-200" href="{{route('addTemplate.show')}}">Add Template</a></li>
                     @endif
+
+                    <li><a class="hover:text-gray-200" href="{{route('media.show')}}">Media</a></li>
 
                     </ul>
                     <!-- Header Icons -->

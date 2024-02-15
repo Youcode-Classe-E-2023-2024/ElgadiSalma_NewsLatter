@@ -1,3 +1,5 @@
+@if (auth()->user()->hasRole('auteur'))
+
 @extends('layout')
 
 @section('content')
@@ -95,3 +97,4 @@
 
 </script>
 @endsection
+@endif
