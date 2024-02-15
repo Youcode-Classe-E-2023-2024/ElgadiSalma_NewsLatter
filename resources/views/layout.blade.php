@@ -46,8 +46,11 @@
                     @endif
 
                     @if (auth()->user()->hasRole('auteur'))
-                    <li><a class="hover:text-gray-200" href="{{route('templates')}}">Templates</a></li>
-                    <li><a class="hover:text-gray-200" href="{{route('addTemplate.show')}}">Add Template</a></li>
+                        <li><a class="hover:text-gray-200" href="{{route('templates')}}">Templates</a></li>
+
+                        @if (auth()->user()->hasPermission('can-create'))
+                        <li><a class="hover:text-gray-200" href="{{route('addTemplate.show')}}">Add Template</a></li>
+                        @endif
                     @endif
 
                     <li><a class="hover:text-gray-200" href="{{route('media.show')}}">Media</a></li>
