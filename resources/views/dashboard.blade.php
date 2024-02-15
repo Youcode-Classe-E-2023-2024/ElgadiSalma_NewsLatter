@@ -1,4 +1,4 @@
-@if (auth()->user()->hasRole('admin'))
+@if (auth()->user()->hasRole('admin|sous-admin'))
 @extends('layout')
 
 @section('content')
@@ -33,48 +33,48 @@
 
 <script>
 
-        console.log("salma");
-           
-        const dates = @json($subscriberStatistics->pluck('date'));
-        const counts = @json($subscriberStatistics->pluck('subscriber_count'));
+    console.log("salma");
+        
+    const dates = @json($subscriberStatistics->pluck('date'));
+    const counts = @json($subscriberStatistics->pluck('subscriber_count'));
 
-        const ctx = document.getElementById('subscriberChart').getContext('2d');
-        const subscriberChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: dates,
-                datasets: [{
-                    label: 'Nombre d\'abonnements ajoutés',
-                    data: counts,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Date'
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Nombre d\'abonnements'
-                        }
+    const ctx = document.getElementById('subscriberChart').getContext('2d');
+    const subscriberChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Nombre d\'abonnements ajoutés',
+                data: counts,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Nombre d\'abonnements'
                     }
                 }
             }
-        });
-
-        function pdf()
-        {
-            const element = document.getElementById('statistique');
-            html2pdf(element);
         }
+    });
+
+    function pdf()
+    {
+        const element = document.getElementById('statistique');
+        html2pdf(element);
+    }
           
 </script>
 
