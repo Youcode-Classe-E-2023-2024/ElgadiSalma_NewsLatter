@@ -1,4 +1,4 @@
-@if (auth()->user()->hasRole('admin'))
+@if (auth()->user()->hasRole('sous-admin'))
 
 @extends('layout')
 
@@ -29,6 +29,7 @@
         </div>
 
         {{-- send --}}
+        @if (auth()->user()->hasPermission('can-send'))
         <form action="{{ route('send.newsletter', $new->id) }}" method="POST">
             @csrf
             <div class="flex justify-center md:justify-end h-full">
@@ -41,6 +42,7 @@
                 </div>
             </div>
         </form>
+        @endif
 
     </div>
     @empty
@@ -77,6 +79,7 @@
         </div>
 
         {{-- restore --}}
+        @if (auth()->user()->hasPermission('can-restore'))
         <form action="{{ route('restore.template', $deletedNew->id) }}" method="POST">
             @csrf
             <div class="flex justify-center md:justify-end h-full">
@@ -89,6 +92,7 @@
                 </div>
             </div>
         </form>
+        @endif
 
     </div>
     @empty
