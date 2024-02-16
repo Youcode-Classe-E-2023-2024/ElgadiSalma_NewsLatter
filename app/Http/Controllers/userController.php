@@ -66,7 +66,6 @@ class userController extends Controller
             ])->onlyInput('email');
 
     }
-
     public function logout(Request $request)
     {
         Auth::logout();
@@ -95,7 +94,6 @@ class userController extends Controller
             abort(404);
         }
     }
-
     public function forgot_password(Request $request)
     {
         $request->validate([
@@ -139,9 +137,7 @@ class userController extends Controller
         }else{
             abort(404);
         }
-    }
-
-    
+    }  
 
 }
 
