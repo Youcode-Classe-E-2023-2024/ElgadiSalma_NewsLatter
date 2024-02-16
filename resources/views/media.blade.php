@@ -51,6 +51,7 @@
                         @endif
                         <p class="text-sm font-bold text-orange-500 text-center">{{ $mediaItem->name }}</p>
 
+                        @if (auth()->user()->hasRole('admin|sous-admin'))
                         {{-- cote admin  --}}
                                 <div class="w-full">
                                     <form action="{{ route('delete.media', $mediaItem->id) }}" method="post">
@@ -61,6 +62,7 @@
                                     </form>
                                 </div>
                        {{-- end cote admin  --}}
+                       @endif
 
                     </div>
                 @endforeach
