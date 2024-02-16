@@ -4,7 +4,7 @@
     <div class="flex flex-col items-center">
         <h1 class="text-4xl text-purple-500 pt-20 text-center font-bold">Média</h1>
 
-        @if (auth()->user()->hasRole('admin'))
+        @if (auth()->user()->hasRole('admin|sous-admin'))
         <form class="w-full max-w-lg m-4 pt-5" method="POST" action="{{ route('add.media') }}"
             enctype="multipart/form-data">
             @csrf
@@ -51,6 +51,7 @@
                         @endif
                         <p class="text-sm font-bold text-orange-500 text-center">{{ $mediaItem->name }}</p>
 
+                        @if (auth()->user()->hasRole('admin|sous-admin'))
                         {{-- cote admin  --}}
                                 <div class="w-full">
                                     <form action="{{ route('delete.media', $mediaItem->id) }}" method="post">
@@ -61,6 +62,7 @@
                                     </form>
                                 </div>
                        {{-- end cote admin  --}}
+                       @endif
 
                     </div>
                 @endforeach
