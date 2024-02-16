@@ -16,6 +16,7 @@
                         <img class="w-10 h-10 rounded-full" src="https://unsplash.com/photos/oh0DITWoHi4/download?force=true&w=640" alt="Christy">
                         <span class="ml-3 font-medium">{{ $subscriber['email'] }}</span>
                     </div>
+                    @if (auth()->user()->hasRole('admin'))
                     <div>
                         <form action="{{ route('delete.subscriber', $subscriber->id ) }}" method="post" class="w-1/2">
                             @csrf
@@ -23,6 +24,7 @@
                             <button type="submit" name="supprimer" class="bg-black rounded-md px-5 py-2 font-semibold text-gray-500 duration-75 hover:bg-gray-700 hover:text-purple-100">Supprimer</button>
                         </form>
                     </div>
+                    @endif
                 </li>
 
                 @empty
