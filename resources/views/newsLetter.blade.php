@@ -101,6 +101,7 @@ Instagram: [Link]
         <p>Hey, Stranger!</p>
         <h2>{{ $template->title }}</h2>
         <p>{{ $template->description }}</p>
+        <img src="{{ $template->media }}" alt="{{ $template->media }}" srcset="">
         <h4 align="right">{{ $template->media }}</h4>
     </div>
 </body>
