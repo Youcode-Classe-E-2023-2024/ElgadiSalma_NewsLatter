@@ -3,6 +3,8 @@
 @extends('layout')
 
 @section('content')
+@if (auth()->user()->hasPermission('can-create'))
+
 
 <div class="text-4xl text-purple-500 pt-20 text-center font-bold">Add Template</div>
 
@@ -80,7 +82,7 @@
   </div>
 </div>
 
-
+@endif
 <script>
   function toggleDropdown()
   {

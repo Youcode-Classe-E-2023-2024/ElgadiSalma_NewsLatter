@@ -40,6 +40,7 @@
                     @endif
 
                     @if (auth()->user()->hasRole('sous-admin'))
+                    <li><a class="hover:text-gray-200" href="{{route('showSubscriberStatistics')}}">Dashboard</a></li>
                     <li><a class="hover:text-gray-200" href="{{route('list.subscribers')}}">Subscribers</a></li>
                     <li><a class="hover:text-gray-200" href="{{route('admin.template')}}">Templates</a></li>
 

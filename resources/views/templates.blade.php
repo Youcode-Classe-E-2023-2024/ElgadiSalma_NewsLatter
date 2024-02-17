@@ -6,6 +6,7 @@
 
 <div class="max-w-6xl mx-auto flex flex-col gap-10 px-5">
 
+    @if (auth()->user()->hasPermission('can-read'))
     @forelse ($news as $new)
     <div class="flex flex-col md:flex-row bg-white  rounded-xl md:bg-transparent shadow-lg shadow-black/20 md:shadow-none gap-10">
         <div class="flex justify-center md:justify-end">
@@ -62,7 +63,7 @@
     @empty
         <p>No news Found</p>
     @endforelse
-
+    @endif
 
 </div>
 
